@@ -18,7 +18,8 @@ pipeline{
                     def str = sh (script: 'ls', returnStdout: true ).trim()
                     def files = str.split("\\s+")
                     echo "Founded ${files.size()} files"
-                    files.each{ it ->
+					echo "files = $files"
+                    files.each{
                         echo "$it"
                         def text = sh(script: "cat $it", returnStdout: true).trim()
                         if (text == "Its test file for first test jenkins job.") echo 'done'
