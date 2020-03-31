@@ -9,9 +9,12 @@ pipeline{
         stage('firstStage'){
             steps{
                 echo 'Hello, it\'s a first stage'
+				dir("../test") {
+					sh "pwd"
+				}
                 script{
-					sh "git clone 'https://github.com/Copypass/jenkins.git'"
-					sh 'cd files'
+					//sh "git clone 'https://github.com/Copypass/jenkins.git'"
+					//sh 'cd files'
                     def str = sh (script: 'ls', returnStdout: true ).trim()
                     def files = str.split("\\s+")
                     echo "Founded ${files.size()} files"
