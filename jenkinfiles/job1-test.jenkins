@@ -11,21 +11,21 @@ pipeline{
                 echo 'Hello, it\'s a first stage'
 				dir("../test") {
 					sh "pwd"
+				
+					script{
+						//sh "git clone 'https://github.com/Copypass/jenkins.git'"
+						//sh 'cd files'
+						def str = sh (script: 'ls', returnStdout: true ).trim()
+						def files = str.split("\\s+")
+						echo "Founded ${files.size()} files"
+						echo "files = $files"
+						files.each{
+							echo "$it"
+							def text = sh(script: "cat $it", returnStdout: true).trim()
+							if (text == "Its test file for first test jenkins job.") echo 'done'
+						}
+					}
 				}
-                script{
-					//sh "git clone 'https://github.com/Copypass/jenkins.git'"
-					//sh 'cd files'
-                    def str = sh (script: 'ls', returnStdout: true ).trim()
-                    def files = str.split("\\s+")
-                    echo "Founded ${files.size()} files"
-					echo "files = $files"
-                    files.each{
-                        echo "$it"
-                        def text = sh(script: "cat $it", returnStdout: true).trim()
-                        if (text == "Its test file for first test jenkins job.") echo 'done'
-                    }
-                }
-                sh 'cat *.txt'
             }
         }
     }
