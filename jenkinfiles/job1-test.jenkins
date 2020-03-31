@@ -10,7 +10,7 @@ pipeline{
             steps{
                 echo 'Hello, it\'s a first stage'
                 script{
-					sh '../test'
+					sh 'cd ../test'
                     def str = sh (script: 'ls', returnStdout: true ).trim()
                     def files = str.split("\\s+")
                     echo "Founded ${files.size()} files"
