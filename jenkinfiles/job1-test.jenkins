@@ -1,6 +1,10 @@
 #!groovy
 pipeline{
     agent any
+	options{
+		timeout(time: 3, unit: 'MINUTES')
+		timestamps()
+	}
     stages{
         stage('firstStage'){
             steps{
